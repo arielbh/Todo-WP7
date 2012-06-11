@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ViewModels="clr-namespace:TodoApp.ViewModels" xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     xmlns:local="clr-namespace:TodoApp.Common" x:Class="TodoApp.MainPage"
+	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -36,7 +38,39 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <controls:Panorama Grid.Row="1" ItemsSource="{Binding Categories}">
+            <controls:Panorama.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </controls:Panorama.HeaderTemplate>
+            <controls:Panorama.ItemTemplate>
+                <DataTemplate>
+                <ListBox ItemsSource="{Binding Todos}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Line Visibility="{Binding IsDone, Converter={StaticResource BoolToVisibilityConverter}}"
+                      X1="10" Y1="0" X2="1" Y2="0" 
+                      Stretch="UniformToFill"
+                      Stroke="White" StrokeThickness="2"
+                      Margin="50,5,8,0"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}">
+                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontSize="29.333"/>
+                                    </CheckBox>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </DataTemplate>
+            </controls:Panorama.ItemTemplate>
+
+        </controls:Panorama>
+        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ListBox ItemsSource="{Binding Todos}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -57,7 +91,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </Grid>
+        </Grid>-->
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

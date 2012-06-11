@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,11 +9,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using TodoApp.ViewModels;
+using TodoApp.Model;
 
-namespace TodoApp.Model
+namespace TodoApp.ViewModels
 {
-    public class Todo : NotifyObject
+    public class CategoryViewModel : NotifyObject
     {
         private string _title;
 
@@ -29,36 +30,20 @@ namespace TodoApp.Model
             }
         }
 
-        private bool _isDone;
+        private ObservableCollection<Todo> _todos;
 
-        public bool IsDone
+        public ObservableCollection<Todo> Todos
         {
-            get { return _isDone; }
+            get { return _todos; }
             set
             {
-                if (value != _isDone)
+                if (value != _todos)
                 {
-                    _isDone = value;
-                    OnPropertyChanged("IsDone");
+                    _todos = value;
+                    OnPropertyChanged("Todos");
                 }
             }
         }
-
-        private DateTime _due;
-
-        public DateTime Due
-        {
-            get { return _due; }
-            set
-            {
-                if (value != _due)
-                {
-                    _due = value;
-                    OnPropertyChanged("Due");
-                }
-            }
-        }
-
 
     }
 }
