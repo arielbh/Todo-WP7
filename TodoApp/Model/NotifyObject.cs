@@ -12,7 +12,7 @@ using System.ComponentModel;
 
 namespace TodoApp.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class NotifyObject : INotifyPropertyChanged
     {
         protected void OnPropertyChanged(string propertyName)
         {
