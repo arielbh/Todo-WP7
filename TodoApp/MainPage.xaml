@@ -38,6 +38,19 @@
         </StackPanel>
        
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ListBox ItemsSource="{Binding Todos}">
+            	<ListBox.Resources>
+            		<DataTemplate x:Key="TodoTemplate">
+            			<Grid>
+            				<CheckBox Content="{Binding Title}" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsDone, Mode=TwoWay}"/>
+            			</Grid>
+            		</DataTemplate>
+            	</ListBox.Resources>
+            	<ListBox.ItemTemplate>
+            		<StaticResource ResourceKey="TodoTemplate"/>
+            	</ListBox.ItemTemplate>
+                
+            </ListBox>
        
         </Grid>
     </Grid>

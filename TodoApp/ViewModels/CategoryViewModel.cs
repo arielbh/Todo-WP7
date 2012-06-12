@@ -11,11 +11,18 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using TodoApp.Common;
 using TodoApp.Model;
+using TodoApp.Services;
 
 namespace TodoApp.ViewModels
 {
     public class CategoryViewModel : NotifyObject
     {
+
+        public CategoryViewModel()
+        {
+            Title = "My Tasks";
+            Todos = new ObservableCollection<Todo>(TodoService.GenereateTodos());
+        }
         private string _title;
 
         public string Title
