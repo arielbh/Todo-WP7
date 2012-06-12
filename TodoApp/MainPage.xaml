@@ -38,20 +38,20 @@
         </StackPanel>
        
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox ItemsSource="{Binding Todos}">
-            	<ListBox.Resources>
-            		<DataTemplate x:Key="TodoTemplate">
-            			<Grid>
-            				<CheckBox Content="{Binding Title}" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsDone, Mode=TwoWay}"/>
-            			</Grid>
-            		</DataTemplate>
-            	</ListBox.Resources>
-            	<ListBox.ItemTemplate>
-            		<StaticResource ResourceKey="TodoTemplate"/>
-            	</ListBox.ItemTemplate>
+        	<ListBox ItemsSource="{Binding Todos}">
+        		<ListBox.Resources>
+        			<DataTemplate x:Key="TodoTemplate">
+        				<Grid>
+        					<CheckBox Content="{Binding Title}" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsDone, Mode=TwoWay}"/>
+        					<Path Data="M45,39 L428.18796,39" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="4" Margin="45,0,0,32" Stretch="Fill" Stroke="White" UseLayoutRounding="False" VerticalAlignment="Bottom" Width="384.188" Visibility="{Binding IsDone, Converter={StaticResource BoolToVisibilityConverter}}" StrokeThickness="50"/>
+        				</Grid>
+        			</DataTemplate>
+        		</ListBox.Resources>
+        		<ListBox.ItemTemplate>
+        			<StaticResource ResourceKey="TodoTemplate"/>
+        		</ListBox.ItemTemplate>
                 
-            </ListBox>
-       
+        	</ListBox>
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
