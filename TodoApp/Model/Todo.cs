@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using TodoApp.Common;
 using TodoApp.ViewModels;
 
 namespace TodoApp.Model
@@ -24,7 +25,7 @@ namespace TodoApp.Model
                 if (value != _title)
                 {
                     _title = value;
-                    OnPropertyChanged("Title");
+                    OnPropertyChanged(() => Title);
                 }
             }
         }
@@ -39,7 +40,7 @@ namespace TodoApp.Model
                 if (value != _isDone)
                 {
                     _isDone = value;
-                    OnPropertyChanged("IsDone");
+                    OnPropertyChanged(() => IsDone);
                 }
             }
         }
@@ -54,7 +55,7 @@ namespace TodoApp.Model
                 if (value != _due)
                 {
                     _due = value;
-                    OnPropertyChanged("Due");
+                    OnPropertyChanged(() => Due);
                 }
             }
         }

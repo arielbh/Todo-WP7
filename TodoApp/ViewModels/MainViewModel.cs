@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,7 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using TodoApp.Common;
 using TodoApp.Model;
+using TodoApp.Services;
 
 namespace TodoApp.ViewModels
 {
@@ -19,36 +22,39 @@ namespace TodoApp.ViewModels
     {
         public MainViewModel()
         {
-            var _todos = new ObservableCollection<Todo>
-                        {
-                            new Todo { Title = "Complete Session.", Due = new DateTime(2012, 6, 12)},
-                            new Todo { Title = "Buy Milk.", Due = new DateTime(2012, 6, 15)},
-                            new Todo { Title = "Go to sleep.", Due = new DateTime(2012, 6, 22)},
-                        };
+            var _todos = TodoService.GenereateTodos();
+
+
+            PrepareCategories(_todos);
+        }
+
+        private void PrepareCategories(IEnumerable<Todo> todos)
+        {
             CategoryViewModel today = new CategoryViewModel
                                           {
                                               Title = "Today",
                                               Todos =
                                                   new ObservableCollection<Todo>(
-                                                  _todos.Where(t => t.Due == DateTime.Today))
+                                                  todos.Where(t => t.Due == DateTime.Today))
                                           };
             CategoryViewModel week = new CategoryViewModel
-            {
-                Title = "Week",
-                Todos =
-                    new ObservableCollection<Todo>(
-                    _todos.Where(t => t.Due >= DateTime.Today &&  t.Due < DateTime.Today.AddDays(7)))
-            };
+                                         {
+                                             Title = "Week",
+                                             Todos =
+                                                 new ObservableCollection<Todo>(
+                                                 todos.Where(t => t.Due >= DateTime.Today && t.Due < DateTime.Today.AddDays(7)))
+                                         };
 
             CategoryViewModel month = new CategoryViewModel
-            {
-                Title = "Month",
-                Todos =
-                    new ObservableCollection<Todo>(
-                    _todos.Where(t => t.Due >= DateTime.Today && t.Due < DateTime.Today.AddDays(30)))
-            };
+                                          {
+                                              Title = "Month",
+                                              Todos =
+                                                  new ObservableCollection<Todo>(
+                                                  todos.Where(
+                                                      t => t.Due >= DateTime.Today && t.Due < DateTime.Today.AddDays(30)))
+                                          };
 
-            Categories = new CategoryViewModel[] { today, week, month};
+            Categories = new CategoryViewModel[] {today, week, month};
         }
 
         private CategoryViewModel[] _categories;
@@ -61,7 +67,7 @@ namespace TodoApp.ViewModels
                 if (value != _categories)
                 {
                     _categories = value;
-                    OnPropertyChanged("Categories");
+                    OnPropertyChanged(() => Categories);
                 }
             }
         }
