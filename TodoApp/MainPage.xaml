@@ -21,7 +21,7 @@
     </phone:PhoneApplicationPage.Resources>
 
     <phone:PhoneApplicationPage.DataContext>
-        <ViewModels:MainViewModel/>
+        <ViewModels:CategoryViewModel/>
     </phone:PhoneApplicationPage.DataContext>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -33,77 +33,12 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="Israel Mobile Summit - Todo" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <controls:Panorama Grid.Row="1" ItemsSource="{Binding Categories}">
-            <controls:Panorama.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title}"/>
-                </DataTemplate>
-            </controls:Panorama.HeaderTemplate>
-            <controls:Panorama.ItemTemplate>
-                <DataTemplate>
-                <ListBox ItemsSource="{Binding Todos}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Line Visibility="{Binding IsDone, Converter={StaticResource BoolToVisibilityConverter}}"
-                      X1="10" Y1="0" X2="1" Y2="0" 
-                      Stretch="UniformToFill"
-                      Stroke="White" StrokeThickness="2"
-                      Margin="50,5,8,0"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}">
-                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontSize="29.333"/>
-                                    </CheckBox>
-                                </StackPanel>
-
-                            </Grid>
-
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                </DataTemplate>
-            </controls:Panorama.ItemTemplate>
-
-        </controls:Panorama>
-        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox ItemsSource="{Binding Todos}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Line Visibility="{Binding IsDone, Converter={StaticResource BoolToVisibilityConverter}}"
-                      X1="10" Y1="0" X2="1" Y2="0" 
-                      Stretch="UniformToFill"
-                      Stroke="White" StrokeThickness="2"
-                      Margin="50,5,8,0"/>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay}">
-                                	<TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontSize="29.333"/>
-                                </CheckBox>
-                            </StackPanel>
-
-                        </Grid>
-                        
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>-->
+       
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+       
+        </Grid>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-
 </phone:PhoneApplicationPage>
